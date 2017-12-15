@@ -1,2 +1,2 @@
-# kotlin-todos
-Kotlin template build with Clean Architecture + MVP + Dagger2 + Rxjava2 + Retrofit2 + Room
+# IDReminder
+Simple reminder app build with Kotlin + RxJava + Dagger2 + MVP + Room
