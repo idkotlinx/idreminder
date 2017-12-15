@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kodeartisan.kotlintemplate">
+    package="com.idkotlin.idreminder">
     
 
 
     <application
-        android:name=".BaseApp"
+        android:name="com.idkotlin.idreminder.BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.ui.reminder.ReminderActivity">
+        <activity android:name="com.idkotlin.idreminder.presentation.ui.reminder.ReminderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".presentation.receiver.AlarmReceiver">
+        <receiver android:name="com.idkotlin.idreminder.presentation.receiver.AlarmReceiver">
 
         </receiver>
     </application>

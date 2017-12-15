@@ -9,7 +9,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.kodeartisan.kotlintemplate"
+        applicationId "com.idkotlin.idreminder"
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
@@ -17,10 +17,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 
     buildTypes {
         release {
