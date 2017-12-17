@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import com.idkotlin.idreminder.R
 import com.idkotlin.idreminder.data.entity.Reminder
 import com.idkotlin.idreminder.presentation.ui.reminder.ReminderAdapter
@@ -24,6 +25,8 @@ class ReminderFragment : BaseFragmentMvp<ReminderFragmentContract.Presenter<Remi
 
     private lateinit var mReminderAdapter: ReminderAdapter
     private var mReminders = mutableListOf<Reminder>()
+    private var mMultiSelectList = mutableListOf<Reminder>()
+    private var mIsMultiSelect = false
 
 
     override fun getLayoutId(): Int = R.layout.fragment_reminder_list
@@ -50,8 +53,10 @@ class ReminderFragment : BaseFragmentMvp<ReminderFragmentContract.Presenter<Remi
         mReminderAdapter = ReminderAdapter(context)
         mReminderAdapter.apply {
             setData(mReminders)
+            setItemLongClickListener{ view: View, i: Int -> toast("Long clicked") }
             setItemClickListener { view, i ->  toast(mReminders[i].active.toString()) }
             setActiveListener { imageView, i -> mPresenter.update(mReminders[i], i) }
+
 
         }
 

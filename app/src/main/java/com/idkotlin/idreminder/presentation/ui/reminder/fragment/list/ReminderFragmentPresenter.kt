@@ -41,7 +41,7 @@ class ReminderFragmentPresenter @Inject constructor(private val schedulerProvide
         reminder.apply {
             active = !active
         }
-        
+
         addSubscribe(reminderRepository.update(reminder)
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())

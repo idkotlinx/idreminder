@@ -71,5 +71,10 @@ object ReminderUtil {
         return calendar.timeInMillis - currentTime
     }
 
+    public fun cancelAlarm(context: Context, id: Int) {
+        val pendingIntent = PendingIntent.getBroadcast(context, id, Intent(context, AlarmReceiver::class.java), 0)
+        BaseApp.appComponent.getAlarmManager().cancel(pendingIntent)
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.tutorial.learnlinuxpro.presentation.ui.base
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 
@@ -14,16 +15,13 @@ constructor(val mContext: Context) : RecyclerView.Adapter<BaseAdapter.BaseViewHo
     var mData: MutableList<T> = mutableListOf()
 
     protected lateinit var mItemClickListener: (View, Int) -> Unit
-    protected lateinit var mItemLongClickListener: ItemLongClickListener
+    protected lateinit var mItemLongClickListener: (View, Int) -> Unit
     protected val mLayoutInflater: LayoutInflater = LayoutInflater.from(mContext)
 
     override fun onBindViewHolder(holder: BaseViewHolder?, position: Int) {
         holder?.fillView(position = position)
         holder?.itemView?.setOnClickListener{mItemClickListener(holder.itemView, position)}
-        holder?.itemView?.setOnLongClickListener{
-            mItemLongClickListener.onItemLongClick(position)
-            true
-        }
+        holder?.itemView?.setOnLongClickListener{mItemLongClickListener(holder.itemView, position);false}
     }
 
     override fun getItemCount(): Int = mData.size
@@ -42,7 +40,10 @@ constructor(val mContext: Context) : RecyclerView.Adapter<BaseAdapter.BaseViewHo
         mItemClickListener = itemClick
     }
 
-    fun setItemLongClickListener(listener: ItemLongClickListener) = {mItemLongClickListener = listener}
+    fun setItemLongClickListener(itemLongClick: (View, Int) -> Unit)  {
+
+        mItemLongClickListener = itemLongClick
+    }
 
     abstract class BaseViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
@@ -54,7 +55,7 @@ constructor(val mContext: Context) : RecyclerView.Adapter<BaseAdapter.BaseViewHo
     }
 
     interface ItemLongClickListener {
-        fun onItemLongClick(position: Int)
+        public fun onItemLongClick(itemView: View?, position: Int)
     }
 
 
