@@ -22,10 +22,9 @@ class ReminderImpl @Inject constructor(@NonNull private val schedulerProvider: B
 
     }
 
-    override fun insert(reminder: Reminder): Observable<Long>{
-        return Observable.fromCallable { appDatabase.reminderDao().insert(reminder) }
+    override fun insert(reminder: Reminder): Observable<Long> = Observable.fromCallable { appDatabase.reminderDao().insert(reminder) }
 
-    }
+    override fun update(reminder: Reminder): Observable<Int> =  Observable.fromCallable{ appDatabase.reminderDao().update(reminder) }
 
 
 

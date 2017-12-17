@@ -14,6 +14,7 @@ import com.idkotlin.idreminder.R
 import com.idkotlin.idreminder.data.entity.Reminder
 import com.idkotlin.idreminder.presentation.receiver.AlarmReceiver
 import com.idkotlin.idreminder.presentation.ui.reminder.fragment.list.ReminderFragment
+import com.idkotlin.idreminder.presentation.util.ReminderUtil
 import com.tutorial.learnlinuxpro.presentation.bus.Event
 import com.tutorial.learnlinuxpro.presentation.ui.base.BaseFragmentMvp
 import kotlinx.android.synthetic.main.fragment_reminder_add.*
@@ -33,6 +34,7 @@ class ReminderAddFragment: BaseFragmentMvp<ReminderAddFragmentContract.Presenter
     private var mRepeat = true
     private var mRepeatNo = 1
     private var mRepeatType = "Hour"
+    private var mRepeatTime: Long = 0
 
     private val mCalendar = Calendar.getInstance()
     private var mHour = mCalendar.get(Calendar.HOUR_OF_DAY)
@@ -207,13 +209,28 @@ class ReminderAddFragment: BaseFragmentMvp<ReminderAddFragmentContract.Presenter
            set(Calendar.SECOND, 0)
         }
 
-        AlarmReceiver().setAlarm(activity.applicationContext, mCalendar, id.toInt())
+        mRepeatTime = when(mRepeatType) {
+            "Minute" -> { mRepeatNo * ReminderUtil.milMinute }
+            "Hour" -> { mRepeatNo * ReminderUtil.milHour }
+            "Day" -> { mRepeatNo * ReminderUtil.milDay }
+            "Month" -> { mRepeatNo * ReminderUtil.milMonth }
+            else -> { 0 }
+        }
+
+        if(mActive) {
+            if(mRepeat) {
+                ReminderUtil.setRepeatAlarm(activity.applicationContext, mCalendar, id.toInt(), mRepeatTime)
+            } else {
+                ReminderUtil.setAlarm(activity.applicationContext, mCalendar, id.toInt())
+            }
+        }
 
         eventBus.send(Event.BackPressed())
 
 
-
     }
+
+
 
 
 

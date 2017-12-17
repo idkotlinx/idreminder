@@ -1,6 +1,7 @@
 package com.tutorial.learnlinuxpro.presentation.di.module
 
 import android.app.AlarmManager
+import android.app.NotificationManager
 import android.arch.persistence.room.Room
 import android.content.Context
 import com.idkotlin.idreminder.BaseApp
@@ -45,5 +46,7 @@ class ApplicationModule(private val app: BaseApp) {
     @Singleton
     fun provideAlarmManager(): AlarmManager = app.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-
+    @Provides
+    @Singleton
+    fun provideNotificationManager(): NotificationManager = app.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 }

@@ -10,10 +10,12 @@ interface ReminderFragmentContract {
 
     interface View : BaseContract.BaseView {
         fun onGetReminders(reminders: List<Reminder>)
+        fun onUpdateReminderItem(position: Int)
     }
 
     interface Presenter<T : BaseContract.BaseView>: BaseContract.BasePresenter<T> {
         fun start()
         fun insert(reminder: Reminder)
+        fun update(reminder: Reminder, position: Int)
     }
 }

@@ -32,7 +32,9 @@ constructor(val mContext: Context) : RecyclerView.Adapter<BaseAdapter.BaseViewHo
         mData.clear()
         mData.addAll(data)
         notifyDataSetChanged()
+
     }
+
 
     fun addSingleData(data: T) = mData.add(data)
 

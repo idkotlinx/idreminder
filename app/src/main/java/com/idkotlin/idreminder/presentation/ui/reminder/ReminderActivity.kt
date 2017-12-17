@@ -34,18 +34,14 @@ class ReminderActivity : BaseActivity(){
 
     override fun initVariables(savedInstanceState: Bundle?) {
         super.initVariables(savedInstanceState)
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
-        alarmManager.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, pendingIntent)
+        if(savedInstanceState == null) initFragment()
 
-        
     }
 
     override fun initWidget() {
         super.initWidget()
         initToolbar()
-        initFragment()
+
     }
 
     private fun initToolbar() {

@@ -50,7 +50,9 @@ class ReminderFragment : BaseFragmentMvp<ReminderFragmentContract.Presenter<Remi
         mReminderAdapter = ReminderAdapter(context)
         mReminderAdapter.apply {
             setData(mReminders)
-            setItemClickListener { view, i ->  toast("Clicked") }
+            setItemClickListener { view, i ->  toast(mReminders[i].active.toString()) }
+            setActiveListener { imageView, i -> mPresenter.update(mReminders[i], i) }
+
         }
 
         recyclerview.apply {
@@ -89,5 +91,7 @@ class ReminderFragment : BaseFragmentMvp<ReminderFragmentContract.Presenter<Remi
         mReminderAdapter.setData(this.mReminders)
     }
 
-
+    override fun onUpdateReminderItem(position: Int) {
+        mReminderAdapter.notifyItemChanged(position)
+    }
 }

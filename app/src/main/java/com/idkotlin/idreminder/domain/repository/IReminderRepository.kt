@@ -12,4 +12,5 @@ interface IReminderRepository {
     fun fetch(): Single<List<Reminder>>
     fun delete(reminder: Reminder)
     fun insert(reminder: Reminder): Observable<Long>
+    fun update(reminder: Reminder): Observable<Int>
 }

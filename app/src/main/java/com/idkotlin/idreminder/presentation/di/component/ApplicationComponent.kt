@@ -1,6 +1,7 @@
 package com.tutorial.learnlinuxpro.presentation.di.component
 
 import android.app.AlarmManager
+import android.app.NotificationManager
 import com.idkotlin.idreminder.domain.executor.scheduler.BaseSchedulerProvider
 import com.idkotlin.idreminder.domain.repository.IReminderRepository
 import com.idkotlin.idreminder.presentation.di.scope.ApplicationScope
@@ -26,6 +27,7 @@ interface ApplicationComponent {
     fun getIReminderRepository(): IReminderRepository
     fun getRxBus(): RxBus
     fun getAlarmManager(): AlarmManager
+    fun getNotificationManager(): NotificationManager
 
     fun inject(target: AlarmReceiver)
 
