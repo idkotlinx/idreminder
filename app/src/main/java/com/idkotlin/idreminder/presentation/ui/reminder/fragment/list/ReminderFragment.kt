@@ -135,7 +135,9 @@ class ReminderFragment : BaseFragmentMvp<ReminderFragmentContract.Presenter<Remi
     }
 
     override fun onDeletedReminders(reminders: List<Reminder>) {
-        mReminderAdapter.setData(mReminderAdapter.mData.filter { mReminderAdapter.mSelectedList.keys.contains(it.id.toInt()).not()})
+        val filteredData = mReminderAdapter.mData.filter { mReminderAdapter.mSelectedList.keys.contains(it.id.toInt()).not()}
+        filteredData.map { ReminderUtil.cancelAlarm(activity.applicationContext, it.id.toInt()) }
+        mReminderAdapter.setData(filteredData)
         mReminderAdapter.mSelectedList.clear()
         mReminderAdapter.mActionMode?.finish()
     }
