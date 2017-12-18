@@ -49,7 +49,9 @@ class ReminderActivity : BaseActivity(){
         supportActionBar?.apply {
             title = getString(R.string.app_name)
             setDisplayShowTitleEnabled(true)
+            elevation = 0f
         }
+
     }
 
     private fun initFragment() {

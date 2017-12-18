@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.text.InputType
 import android.util.Log
 import android.view.Menu
@@ -58,6 +59,7 @@ class ReminderAddFragment: BaseFragmentMvp<ReminderAddFragmentContract.Presenter
 
     override fun initWidget() {
         super.initWidget()
+
 
     }
 

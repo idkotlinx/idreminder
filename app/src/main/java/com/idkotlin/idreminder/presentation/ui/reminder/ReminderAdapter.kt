@@ -10,13 +10,14 @@ import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.idkotlin.idreminder.R
 import com.idkotlin.idreminder.data.entity.Reminder
+import com.idkotlin.idreminder.presentation.ui.base.MultiSelectAdapter
 import com.tutorial.learnlinuxpro.presentation.ui.base.BaseAdapter
 import kotlinx.android.synthetic.main.adapter_reminder.view.*
 
 /**
  * Created by kodeartisan on 29/11/17.
  */
-class ReminderAdapter(context: Context): BaseAdapter<Reminder>(context) {
+class ReminderAdapter(context: Context): MultiSelectAdapter<Reminder>(context) {
 
     private val TAG = ReminderAdapter::class.java.simpleName
 

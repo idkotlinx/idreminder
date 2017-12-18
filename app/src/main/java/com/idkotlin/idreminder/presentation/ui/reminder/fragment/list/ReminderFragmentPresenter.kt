@@ -36,6 +36,15 @@ class ReminderFragmentPresenter @Inject constructor(private val schedulerProvide
        }
     }
 
+    override fun delete(reminders: List<Reminder>) {
+        Log.d(TAG, reminders.size.toString())
+        mView.onDeletedReminders(reminders)
+        addSubscribe(reminderRepository.delete(reminders)
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
+                .subscribe({mView.onDeletedReminders(reminders)}, {it.printStackTrace()}))
+    }
+
     override fun update(reminder: Reminder, position: Int) {
         updatePosition = position
         reminder.apply {

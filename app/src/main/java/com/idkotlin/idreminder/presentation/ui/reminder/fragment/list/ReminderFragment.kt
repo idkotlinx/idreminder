@@ -2,14 +2,13 @@ package com.idkotlin.idreminder.presentation.ui.reminder.fragment.list
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.util.Log
+import android.view.*
 import com.idkotlin.idreminder.R
 import com.idkotlin.idreminder.data.entity.Reminder
 import com.idkotlin.idreminder.presentation.ui.reminder.ReminderAdapter
 import com.idkotlin.idreminder.presentation.ui.reminder.fragment.add.ReminderAddFragment
+import com.idkotlin.idreminder.presentation.util.ReminderUtil
 import com.tutorial.learnlinuxpro.presentation.bus.Event
 import com.tutorial.learnlinuxpro.presentation.extension.toast.toast
 import com.tutorial.learnlinuxpro.presentation.ui.base.BaseFragmentMvp
@@ -24,9 +23,32 @@ class ReminderFragment : BaseFragmentMvp<ReminderFragmentContract.Presenter<Remi
     private val TAG = ReminderFragment::class.java.name
 
     private lateinit var mReminderAdapter: ReminderAdapter
-    private var mReminders = mutableListOf<Reminder>()
-    private var mMultiSelectList = mutableListOf<Reminder>()
-    private var mIsMultiSelect = false
+    private val mReminders = mutableListOf<Reminder>()
+
+    private val actionModeCallback: ActionMode.Callback by lazy {
+        object : ActionMode.Callback {
+            override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?) = when(item?.itemId) {
+                R.id.action_multi_delete -> {
+                    mPresenter.delete(ArrayList(mReminderAdapter.mSelectedList.values))
+                    true
+                }
+                else -> false
+            }
+
+            override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                activity.menuInflater.inflate(R.menu.multi_select, menu)
+                return true
+            }
+
+            override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean = false
+            override fun onDestroyActionMode(mode: ActionMode?) {
+                toast("onDestroyActionMode Called")
+                mReminderAdapter.mActionMode = null
+                mReminderAdapter.mIsMultiSelect = false
+                mReminderAdapter.mSelectedList.clear()
+            }
+        }
+    }
 
 
     override fun getLayoutId(): Int = R.layout.fragment_reminder_list
@@ -53,9 +75,21 @@ class ReminderFragment : BaseFragmentMvp<ReminderFragmentContract.Presenter<Remi
         mReminderAdapter = ReminderAdapter(context)
         mReminderAdapter.apply {
             setData(mReminders)
-            setItemLongClickListener{ view: View, i: Int -> toast("Long clicked") }
-            setItemClickListener { view, i ->  toast(mReminders[i].active.toString()) }
+            setItemClickListener { view, i ->
+                if(mReminderAdapter.mIsMultiSelect) mReminderAdapter.multiSelect(mReminderAdapter.mData[i].id.toInt(), mReminders[i])
+
+            }
             setActiveListener { imageView, i -> mPresenter.update(mReminders[i], i) }
+            setItemLongClickListener{ view: View, i: Int ->
+                toast("onLongClicked")
+                mReminderAdapter.mActionMode = activity.startActionMode(actionModeCallback)
+                if(!mReminderAdapter.mIsMultiSelect) {
+                    mReminderAdapter.mIsMultiSelect = true
+
+                }
+
+                mReminderAdapter.multiSelect(mReminderAdapter.mData[i].id.toInt(), mReminders[i])
+            }
 
 
         }
@@ -99,4 +133,12 @@ class ReminderFragment : BaseFragmentMvp<ReminderFragmentContract.Presenter<Remi
     override fun onUpdateReminderItem(position: Int) {
         mReminderAdapter.notifyItemChanged(position)
     }
+
+    override fun onDeletedReminders(reminders: List<Reminder>) {
+        mReminderAdapter.setData(mReminderAdapter.mData.filter { mReminderAdapter.mSelectedList.keys.contains(it.id.toInt()).not()})
+        mReminderAdapter.mSelectedList.clear()
+        mReminderAdapter.mActionMode?.finish()
+    }
+
+
 }

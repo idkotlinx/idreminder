@@ -18,9 +18,10 @@ class ReminderImpl @Inject constructor(@NonNull private val schedulerProvider: B
 
     override fun fetch(): Single<List<Reminder>> = appDatabase.reminderDao().getReminders().subscribeOn(schedulerProvider.multi())
 
-    override fun delete(reminder: Reminder) {
-
+    override fun delete(reminders: List<Reminder>): Observable<Unit> = Observable.fromCallable {
+        appDatabase.reminderDao().delete(reminders)
     }
+
 
     override fun insert(reminder: Reminder): Observable<Long> = Observable.fromCallable { appDatabase.reminderDao().insert(reminder) }
 

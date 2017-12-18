@@ -10,7 +10,7 @@ import io.reactivex.Single
 interface IReminderRepository {
 
     fun fetch(): Single<List<Reminder>>
-    fun delete(reminder: Reminder)
+    fun delete(reminders: List<Reminder>): Observable<Unit>
     fun insert(reminder: Reminder): Observable<Long>
     fun update(reminder: Reminder): Observable<Int>
 }

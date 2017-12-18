@@ -8,6 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="actionModeBackground">@color/colorPrimary</item>
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat</item>
+        <item name="windowActionModeOverlay">true</item>
+
 
     </style>
 
@@ -18,6 +20,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="windowActionBarOverlay">true</item>
+
     </style>
 
     <style name="AppTheme.NoActionBarTransparent" parent="Theme.AppCompat.Light.NoActionBar">
