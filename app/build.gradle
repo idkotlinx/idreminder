@@ -45,12 +45,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
     implementation "com.jakewharton.rxrelay2:rxrelay:$rxrelay_version"
 
-    // http request
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
-
     // dependency injection
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
@@ -61,10 +55,7 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$room_version"
 
     // others
-    implementation "com.github.bumptech.glide:glide:$glide_version"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
     implementation "com.amulyakhare:com.amulyakhare.textdrawable:$text_drawable_version"
-    implementation "com.google.android.gms:play-services-ads:$google_play_version"
 
 }
 

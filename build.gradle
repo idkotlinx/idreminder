@@ -6,11 +6,8 @@ buildscript {
     ext.rxjava_version='2.1.5'
     ext.rxandroid_version='2.0.1'
     ext.rxrelay_version='2.0.0'
-    ext.retrofit_version='2.3.0'
     ext.logging_interceptor_version='3.8.0'
     ext.dagger_version='2.12'
-    ext.glide_version='4.2.0'
-    ext.google_play_version='11.4.2'
     ext.room_version='1.0.0-alpha9'
     ext.text_drawable_version='1.0.1'
     repositories {
