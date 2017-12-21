@@ -1,7 +1,9 @@
 package com.idkotlin.idreminder.presentation.ui.reminder
 
 import android.content.Context
+import android.graphics.Color
 import android.media.Image
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -20,6 +22,7 @@ import kotlinx.android.synthetic.main.adapter_reminder.view.*
 class ReminderAdapter(context: Context): MultiSelectAdapter<Reminder>(context) {
 
     private val TAG = ReminderAdapter::class.java.simpleName
+     val mColorGenerator = ColorGenerator.DEFAULT
 
     private lateinit var mActiveListener: (ImageView, Int) -> Unit
 
@@ -29,7 +32,6 @@ class ReminderAdapter(context: Context): MultiSelectAdapter<Reminder>(context) {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder {
         val view = mLayoutInflater.inflate(R.layout.adapter_reminder, parent, false)
-
         return ReminderViewholder(view)
 
     }
@@ -39,12 +41,13 @@ class ReminderAdapter(context: Context): MultiSelectAdapter<Reminder>(context) {
         (holder as ReminderViewholder)?.mIvActive?.setOnClickListener{mActiveListener(it.active_image, position)}
     }
 
-    inner class ReminderViewholder(itemView: View?) : BaseViewHolder(itemView) {
+
+    inner class ReminderViewholder(itemView: View?) : MultiSelectViewHolder(itemView) {
 
         private val TAG = ReminderViewholder::class.java.simpleName
 
         private lateinit var mReminder: Reminder
-        private val mColorGenerator = ColorGenerator.DEFAULT
+        private var mColor: Int? = null
         private val mTxtTitle: TextView? by lazy { itemView?.findViewById<TextView>(R.id.title)}
         val mIvThumbnail: ImageView? by lazy { itemView?.findViewById<ImageView>(R.id.thumbnail_image) }
         val mIvActive: ImageView? by lazy { itemView?.findViewById<ImageView>(R.id.active_image) }
@@ -58,7 +61,11 @@ class ReminderAdapter(context: Context): MultiSelectAdapter<Reminder>(context) {
             setDateTime()
             setRepeatInfo()
             setActiveDrawable()
+        }
 
+        override fun onChangeState(state: Boolean, position: Int) {
+            super.onChangeState(state, position)
+            Log.d(TAG, "onChangeState ${state} position ${position}")
         }
 
         private fun setTitle() {
@@ -67,9 +74,9 @@ class ReminderAdapter(context: Context): MultiSelectAdapter<Reminder>(context) {
 
         private fun setTitleDrawable() {
             val letter = if(mReminder.title.isNotEmpty()) mReminder.title.substring(0, 1) else "A"
-            val color = mColorGenerator.randomColor
-            val drawableBuilder = TextDrawable.builder().buildRound(letter, color)
-            mIvThumbnail?.setImageDrawable(drawableBuilder)
+            val textDrawable = TextDrawable.builder().buildRound(letter, mColorGenerator.randomColor)
+
+            mIvThumbnail?.setImageDrawable(textDrawable)
         }
 
         private fun setDateTime() {
@@ -83,13 +90,14 @@ class ReminderAdapter(context: Context): MultiSelectAdapter<Reminder>(context) {
         }
 
         private fun setActiveDrawable() {
-
             val imageDrawable = if(mReminder.active) R.drawable.ic_notifications_active else R.drawable.ic_notifications_off
             mIvActive?.setImageResource(imageDrawable)
 
         }
 
     }
+
+
 
 
 }
