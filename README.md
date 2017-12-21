@@ -24,3 +24,11 @@ A minimal notification reminder for Android build with Kotlin + Clean Architectu
 - **Website**: https://idkotlin.com/
 - **Email**: kodeartisan@gmail.com
 - **Facebook**: https://www.facebook.com/dika.budiaji
+
+## Future Roadmap
+- add icon app
+- Write test cases
+
+<p align="center">
+  <h3>Proudly :muscle: made in <b><a href="https://kotlinlang.org/">Kotlin</a></b></h3>
+</p>
