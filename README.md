@@ -16,14 +16,11 @@ A minimal notification reminder for Android build with Kotlin + Clean Architectu
 
 <img height="450px" src="https://github.com/idkotlinx/idreminder/blob/master/art/ss1.png" />
 
-<img  height="450px" src="https://raw.githubusercontent.com/abhinav272/NewsApp/master/art/Screenshot_1509641449.png" />
+<img  height="450px" src="https://github.com/idkotlinx/idreminder/blob/master/art/ss2.png" />
 
-<img  height="450px" src="https://raw.githubusercontent.com/abhinav272/NewsApp/master/art/Screenshot_1509642715.png" />
+<img  height="450px" src="https://github.com/idkotlinx/idreminder/blob/master/art/ss3.png" />
 
 ## Contact
-- **Email**: chatikyana@gmail.com
-- **Facebook**: https://web.facebook.com/chatikyana
-- **Twitter**: https://twitter.com/ArmanChatikyan
-- **Google +**: https://plus.google.com/+ArmanChatikyan
-- **Website**: https://armcha.github.io/
-- **Medium**: https://medium.com/@chatikyan
+- **Website**: https://idkotlin.com/
+- **Email**: kodeartisan@gmail.com
+- **Facebook**: https://www.facebook.com/dika.budiaji
