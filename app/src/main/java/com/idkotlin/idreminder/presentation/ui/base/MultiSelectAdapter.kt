@@ -18,7 +18,7 @@ import com.tutorial.learnlinuxpro.presentation.extension.collection.forEachWithI
 abstract class MultiSelectAdapter<T>(context: Context): BaseAdapter<T>(context) {
 
     var mIsMultiSelectMode = false
-    var mMultiSelect = true
+    var mMultiSelect = false
     var mActionMode: ActionMode? = null
     val mSelectedList = HashMap<Int, T>()
     private val mItemList = HashMap<Int, StateType<T>>()
